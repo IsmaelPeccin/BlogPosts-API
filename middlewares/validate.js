@@ -1,11 +1,10 @@
-const userSchema = require('../schema/userSchema');
-
-const createValidate = (req, res, next) => {
+const validate = (schema) => (req, res, next) => {
   try {
-    const { error } = userSchema.validate(req.body);
+    const { error } = schema.validate(req.body);
 
     if (error) {
       const [code, message] = error.message.split('|');
+      console.log('ISMAEL', code);
       return res.status(code).json({ message });
     }
     return next();
@@ -14,4 +13,4 @@ const createValidate = (req, res, next) => {
   }
 };
 
-module.exports = createValidate;
+module.exports = validate;
