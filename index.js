@@ -1,15 +1,15 @@
+require('dotenv').config();
 const express = require('express');
-
-const { userRouter } = require('./routes');
-
-const { errorMiddleware } = require('./middlewares');
+const routers = require('./routes');
+const middlewares = require('./middlewares');
 
 const app = express();
-
 app.use(express.json());
-app.use('/user', userRouter);
 
-app.use(errorMiddleware);
+app.use('/user', routers.userRouter);
+app.use('/login', routers.loginRouter);
+
+app.use(middlewares.errorMiddleware);
 
 app.listen(3000, () => console.log('ouvindo porta 3000!'));
 
