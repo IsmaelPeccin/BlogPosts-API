@@ -21,7 +21,6 @@ const Attributes = {
   },
   image: {
     type: DataTypes.STRING,
-    allowNull: true,
   },
 };
 
@@ -31,12 +30,12 @@ module.exports = (sequelize) => {
     Attributes,
     {
       undescored: true, 
-      timestamp: false,
+      timestamps: false,
       tableName: 'Users',
     },
   );
   User.associate = (models) => {
-    User.belongsToMany(models.BlogPost, {
+    User.hasMany(models.BlogPost, {
       foreignKey: 'userId', as: 'posts',
     });
   };

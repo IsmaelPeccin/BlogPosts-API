@@ -35,13 +35,13 @@ module.exports = (sequelize) => {
     Attributes,
     {
       undescored: true, 
-      timestamp: false,
+      timestamps: false,
       tableName: 'BlogPosts',
     },
   );
 
   BlogPost.associate = (models) => {
-    BlogPost.hasOne(models.User, {
+    BlogPost.belongsTo(models.User, {
       foreignKey: 'userId', as: 'user',
     });
   };

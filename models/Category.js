@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
     Attributes,
     {
       undescored: true, 
-      timestamp: false,
+      timestamps: false,
       tableName: 'Categories',
     },
   );
