@@ -8,7 +8,7 @@ const login = async (email, password) => {
     return { message: 'Invalid fields' };
   }
 
-  const token = jwtGenerator({ email, password });
+  const token = jwtGenerator({ email });
 
   return { token };
 };
