@@ -1,4 +1,4 @@
-const userService = require('../service/userService'); 
+const userService = require('../service/userService');
 
 const create = async (req, res, next) => {
   try {
@@ -15,13 +15,33 @@ const create = async (req, res, next) => {
   }
 };
 
-// const findAll = async (req, res, mext) => { 
-//   try {
-//     const {} = 
-//   }
-// };
+const findAll = async (_req, res, next) => { 
+  try {
+    const response = await userService.findAll();
+
+    return res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const findById = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+
+    const response = await userService.findById(id);
+
+    if (response.message) {
+      return res.status(404).json({ message: response.message });
+    }
+    return res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {
   create,
-  // findAll,
+  findAll,
+  findById,
 };
