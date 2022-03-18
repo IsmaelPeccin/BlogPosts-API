@@ -27,18 +27,16 @@ const findAll = async () => {
   return allPosts;
 };
 
-const findById = async (id) => {
-  const postById = await BlogPost.findByPk(id, {
+const findByPk = async (id) => {
+  const post = await BlogPost.findByPk(id, {
     include: [
-      { model: User, as: 'user', attributes: { exclude: ['password'] } },
-      { model: Category, as: 'categories', through: { attributes: [] } },
-    ],
-  
-   });
-   if (!postById) {
-     return { message: 'Post does not exist' };
-   }
-  return postById;
+      { model: User, as: 'user', attributes: { exclude: ['password'] } }, 
+      { model: Category, as: 'categories', through: { attributes: [] } }],
+  });
+  if (!post) {
+    return { message: 'Post does not exist' };
+  }
+  return post;
 };
 
 const destroy = async (id, userId) => {
@@ -61,6 +59,6 @@ const destroy = async (id, userId) => {
 module.exports = {
   create,
   findAll,
-  findById,
+  findByPk,
   destroy,
 };

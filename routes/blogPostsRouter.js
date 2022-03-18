@@ -21,7 +21,7 @@ blogPostRouter.get(
 blogPostRouter.get(
   '/:id',
   auth,
-  blogPost.findById,
+  blogPost.findByPk,
 );
 
 blogPostRouter.delete(

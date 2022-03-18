@@ -26,17 +26,16 @@ const findAll = async (_req, res, next) => {
   }
 };
 
-const findById = async (req, res, next) => { 
+const findByPk = async (req, res, next) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
+    const post = await blogPostService.findByPk(id);
 
-    const { message, postById } = await blogPostService.findById(id);
-
-    if (message) {
-      return res.status(404).json({ message });
+    if (post.message) {
+      return res.status(404).json({ message: post.message });
     }
-
-    return res.status(200).json({ postById });
+    
+    return res.status(200).json(post);
   } catch (error) {
     next(error);
   }
@@ -62,6 +61,6 @@ const destroy = async (req, res, next) => {
 module.exports = {
   create,
   findAll,
-  findById,
+  findByPk,
   destroy,
 };
