@@ -18,12 +18,13 @@ const Attributes = {
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
+    foreignKey: true,
   },
   published: {
-    type: DataTypes.STRING,
+    type: DataTypes.DATE,
   },
   updated: {
-    type: DataTypes.STRING,
+    type: DataTypes.DATE,
   },
 };
 

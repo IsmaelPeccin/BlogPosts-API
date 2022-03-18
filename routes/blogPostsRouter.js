@@ -12,10 +12,16 @@ blogPostRouter.post(
   blogPost.create,
 );
 
-// blogPostRouter.get(
-//   '/',
-//   auth,
-//   categories.findAll,
-// );
+blogPostRouter.get(
+  '/',
+  auth,
+  blogPost.findAll,
+);
+
+blogPostRouter.delete(
+  '/:id',
+  auth,
+  blogPost.destroy,
+);
 
 module.exports = blogPostRouter;

@@ -16,15 +16,32 @@ const create = async (req, res, next) => {
   }
 };
 
-// const findAll = async (_req, res, next) => { 
-//   try {
-//     const response = await categoriesService.findAll();
+const findAll = async (_req, res, next) => { 
+  try {
+    const allPosts = await blogPostService.findAll();
 
-//     return res.status(200).json(response);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+    return res.status(200).json(allPosts);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const destroy = async (req, res, next) => {
+  try {
+    const userId = req.tokenData.id;
+    const { id } = req.params;
+
+   const { message, code } = await blogPostService.destroy(id, userId);
+
+   if (message) {
+     return res.status(code).json({ message });
+   }
+
+    return res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};
 
 // const findById = async (req, res, next) => {
 //   try {
@@ -43,6 +60,7 @@ const create = async (req, res, next) => {
 
 module.exports = {
   create,
-  // findAll,
+  findAll,
+  destroy,
   // findById,
 };

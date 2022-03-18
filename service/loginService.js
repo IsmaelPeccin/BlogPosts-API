@@ -9,7 +9,7 @@ const login = async (email, password) => {
   }
 
   const token = jwtGenerator({ findUser });
-
+  
   return { token };
 };
 
