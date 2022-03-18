@@ -13,7 +13,7 @@ const create = async (title, content, categoryIds, userId) => {
 
   const createPost = await BlogPost.create({ title, content, userId });
 
-  return { createPost };
+  return createPost;
 };
 
 // const findAll = async () => {

@@ -40,8 +40,21 @@ const findById = async (req, res, next) => {
   }
 };
 
+const destroy = async (req, res, next) => {
+  try {
+    const { email } = req.tokenData;
+
+    await userService.destroy(email);
+
+    return res.status(204).end();
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   create,
   findAll,
   findById,
+  destroy,
 };

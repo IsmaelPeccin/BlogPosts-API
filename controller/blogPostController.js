@@ -4,13 +4,13 @@ const create = async (req, res, next) => {
   try {
     const { title, content, categoryIds } = req.body;
     const { id } = req.tokenData;
-    const { message, newPost } = await blogPostService.create(title, content, categoryIds, id);
+    const { message, createPost } = await blogPostService.create(title, content, categoryIds, id);
 
     if (message) {
       return res.status(400).json({ message });
     }
     
-    return res.status(201).json({ newPost });
+    return res.status(201).json(createPost);
   } catch (error) {
     next(error);
   }

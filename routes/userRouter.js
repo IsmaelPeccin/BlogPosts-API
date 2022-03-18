@@ -23,4 +23,10 @@ userRouter.get(
   user.findById,
 );
 
+userRouter.delete(
+  '/me',
+  auth,
+  user.destroy,
+);
+
 module.exports = userRouter;
