@@ -21,11 +21,9 @@ const Attributes = {
   },
   published: {
     type: DataTypes.STRING,
-    allowNull: false,
   },
   updated: {
     type: DataTypes.STRING,
-    allowNull: false,
   },
 };
 

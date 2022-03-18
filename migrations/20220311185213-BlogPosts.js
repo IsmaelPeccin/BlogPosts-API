@@ -29,11 +29,9 @@ module.exports = {
       },
       published:{
         type: Sequelize.STRING,
-        allowNull: false,
       },
       updated: {
         type: Sequelize.STRING,
-        allowNull: false,
       }
    })
   },

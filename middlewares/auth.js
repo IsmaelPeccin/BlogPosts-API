@@ -9,7 +9,7 @@ module.exports = async (req, res, next) => {
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
-    req.tokenData = decoded.data;
+    req.tokenData = decoded.data.findUser;
 
     next();
   } catch (error) {
