@@ -26,6 +26,22 @@ const findAll = async (_req, res, next) => {
   }
 };
 
+const findById = async (req, res, next) => { 
+  try {
+    const { id } = req.body;
+
+    const { message, postById } = await blogPostService.findById(id);
+
+    if (message) {
+      return res.status(404).json({ message });
+    }
+
+    return res.status(200).json({ postById });
+  } catch (error) {
+    next(error);
+  }
+};
+
 const destroy = async (req, res, next) => {
   try {
     const userId = req.tokenData.id;
@@ -43,24 +59,9 @@ const destroy = async (req, res, next) => {
   }
 };
 
-// const findById = async (req, res, next) => {
-//   try {
-//     const { id } = req.params;
-
-//     const response = await userService.findById(id);
-
-//     if (response.message) {
-//       return res.status(404).json({ message: response.message });
-//     }
-//     return res.status(200).json(response);
-//   } catch (error) {
-//     next(error);
-//   }
-// };
-
 module.exports = {
   create,
   findAll,
+  findById,
   destroy,
-  // findById,
 };

@@ -27,6 +27,20 @@ const findAll = async () => {
   return allPosts;
 };
 
+const findById = async (id) => {
+  const postById = await BlogPost.findByPk(id, {
+    include: [
+      { model: User, as: 'user', attributes: { exclude: ['password'] } },
+      { model: Category, as: 'categories', through: { attributes: [] } },
+    ],
+  
+   });
+   if (!postById) {
+     return { message: 'Post does not exist' };
+   }
+  return postById;
+};
+
 const destroy = async (id, userId) => {
   if (id !== userId) {
     return { 
@@ -47,5 +61,6 @@ const destroy = async (id, userId) => {
 module.exports = {
   create,
   findAll,
+  findById,
   destroy,
 };

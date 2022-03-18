@@ -18,6 +18,12 @@ blogPostRouter.get(
   blogPost.findAll,
 );
 
+blogPostRouter.get(
+  '/:id',
+  auth,
+  blogPost.findById,
+);
+
 blogPostRouter.delete(
   '/:id',
   auth,
