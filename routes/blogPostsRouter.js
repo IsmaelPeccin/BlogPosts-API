@@ -2,6 +2,7 @@ const express = require('express');
 const { auth, validate } = require('../middlewares');
 const blogPost = require('../controller/blogPostController');
 const blogPostSchema = require('../schema/blogPostSchema');
+const updateSchema = require('../schema/blogPostSchema');
 
 const blogPostRouter = express.Router();
 
@@ -22,6 +23,13 @@ blogPostRouter.get(
   '/:id',
   auth,
   blogPost.findByPk,
+);
+
+blogPostRouter.put(
+  '/:id',
+  auth,
+  validate(updateSchema),
+  blogPost.update,
 );
 
 blogPostRouter.delete(
