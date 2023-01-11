@@ -41,6 +41,24 @@ const findByPk = async (req, res, next) => {
   }
 };
 
+const update = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const postBody = req.body;
+    const userId = req.tokenData.id;
+    
+    const { code, message, updatedPost } = await blogPostService.update(id, postBody, userId);
+
+    if (message) {
+      return res.status(code).json({ message });
+    }
+
+    return res.status(200).json(updatedPost);
+  } catch (error) {
+    next(error);
+  }
+};
+
 const destroy = async (req, res, next) => {
   try {
     const userId = req.tokenData.id;
@@ -62,5 +80,6 @@ module.exports = {
   create,
   findAll,
   findByPk,
+  update,
   destroy,
 };
