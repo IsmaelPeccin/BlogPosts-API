@@ -39,6 +39,24 @@ const findByPk = async (id) => {
   return post;
 };
 
+const update = async (postBody, id, userId) => {
+  if (postBody.categoryIds) {
+    return {
+      message: 'Categories cannot be edited',
+      code: 400,
+    };
+  }
+  if (id !== userId) {
+    return { 
+      message: 'Unauthorized user',
+      code: 401,
+    };
+  }
+  await BlogPost.update(postBody.title, postBody.content, { where: { id } });
+  const updatedPost = await BlogPost.findByPk(id);
+  return { updatedPost };
+};
+
 const destroy = async (id, userId) => {
   if (id !== userId) {
     return { 
@@ -60,5 +78,6 @@ module.exports = {
   create,
   findAll,
   findByPk,
+  update,
   destroy,
 };
